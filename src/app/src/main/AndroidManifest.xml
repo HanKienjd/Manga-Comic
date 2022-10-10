@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.atul.mangatain">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.atul.mangatain">
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup"
@@ -17,7 +14,8 @@
         <activity android:name=".ui.reader.ReadActivity" />
         <activity android:name=".ui.detail.MangaDetails" />
         <activity android:name=".ui.novel.NovelDetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
