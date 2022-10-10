@@ -19,7 +19,7 @@ import com.atul.mangatain.MTPreferences;
 import com.atul.mangatain.R;
 import com.atul.mangatain.ui.setting.adapter.AccentAdapter;
 
-public class SettingFragment extends Fragment implements View.OnClickListener {
+public class  SettingFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView accentView;
     private LinearLayout chipLayout;
