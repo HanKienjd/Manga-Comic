@@ -6,17 +6,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.atul.mangatain.MTConstants;
 import com.atul.mangatain.MTPreferences;
 import com.atul.mangatain.R;
+import com.atul.mangatain.ui.login.Login;
 import com.atul.mangatain.ui.setting.adapter.AccentAdapter;
 
 public class  SettingFragment extends Fragment implements View.OnClickListener {
@@ -24,6 +27,8 @@ public class  SettingFragment extends Fragment implements View.OnClickListener {
     private RecyclerView accentView;
     private LinearLayout chipLayout;
     private ImageView currentThemeMode;
+    Button signIn;
+    Button signOut;
 
     public SettingFragment() {
     }
@@ -45,10 +50,13 @@ public class  SettingFragment extends Fragment implements View.OnClickListener {
         accentView = view.findViewById(R.id.accent_view);
         chipLayout = view.findViewById(R.id.chip_layout);
         currentThemeMode = view.findViewById(R.id.current_theme_mode);
+        signIn = view.findViewById(R.id.signInSetting);
+        signOut = view.findViewById(R.id.signOutSetting);
 
         LinearLayout accentOption = view.findViewById(R.id.accent_option);
         LinearLayout themeModeOption = view.findViewById(R.id.theme_mode_option);
         LinearLayout githubOption = view.findViewById(R.id.github_option);
+        LinearLayout loginOption = view.findViewById(R.id.login_option);
 
         setCurrentThemeMode();
 
@@ -58,6 +66,23 @@ public class  SettingFragment extends Fragment implements View.OnClickListener {
         accentOption.setOnClickListener(this);
         themeModeOption.setOnClickListener(this);
         githubOption.setOnClickListener(this);
+
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment loginFragment = new Login();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.settingLayout, loginFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
 
         view.findViewById(R.id.night_chip).setOnClickListener(this);
         view.findViewById(R.id.light_chip).setOnClickListener(this);

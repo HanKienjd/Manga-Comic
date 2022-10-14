@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jacki/AndroidStudioProjects/Manga-Comic/src/app/src/main/res/layout/fragment_login.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3375" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.5" />
