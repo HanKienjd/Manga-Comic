@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackgroundHigh"
+    android:orientation="vertical"
     tools:context=".ui.setting.SettingFragment">
 
     <LinearLayout
@@ -23,6 +23,105 @@
             android:textColor="?colorPrimary"
             android:textSize="@dimen/text_big"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/llProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_photo"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans"
+                        android:textAlignment="center"
+                        tools:text="example@gmail.com"
+                        android:textColor="@color/colorTextHigh"
+                        android:textSize="@dimen/text_big" />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:src="@drawable/ic_male"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/click_to_signout"
+                    android:textColor="@color/colorTextMed"
+                    android:textSize="@dimen/text_big_med" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image"
+                android:src="@drawable/user_circle"
+                app:tint="?colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/sign_in"
+                    android:textColor="@color/colorTextHigh"
+                    android:textSize="@dimen/text_big" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/login_desc"
+                    android:textColor="@color/colorTextMed"
+                    android:textSize="@dimen/text_big_med" />
+
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/theme_mode_option"
@@ -179,7 +278,6 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:contentDescription="@string/image"
                 android:src="@drawable/ic_github"
                 app:tint="?colorPrimary" />
@@ -187,13 +285,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
                     android:text="@string/find_us_on_github"
                     android:textColor="@color/colorTextHigh"
@@ -201,90 +298,14 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
                     android:text="@string/raise_issue_join_the_community"
                     android:textColor="@color/colorTextMed"
                     android:textSize="@dimen/text_big_med" />
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/image"
-                    android:src="@drawable/user_circle"
-                    app:tint="?colorPrimary" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/nunito_sans"
-                        android:text="@string/find_us_on_github"
-                        android:textColor="@color/colorTextHigh"
-                        android:textSize="@dimen/text_big" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/nunito_sans"
-                        android:text="@string/raise_issue_join_the_community"
-                        android:textColor="@color/colorTextMed"
-                        android:textSize="@dimen/text_big_med" />
-
-                </LinearLayout>
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center_vertical"-->
-<!--                android:contentDescription="@string/image"-->
-<!--                android:src="@drawable/user_circle"-->
-<!--                app:tint="?colorPrimary" />-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center_vertical"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:fontFamily="@font/nunito_sans"-->
-<!--                    android:text="@string/action_sign_in_short"-->
-<!--                    android:textColor="@color/colorTextHigh"-->
-<!--                    android:textSize="@dimen/text_big" />-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:fontFamily="@font/nunito_sans"-->
-<!--                    android:text="@string/raise_issue_join_the_community"-->
-<!--                    android:textColor="@color/colorTextMed"-->
-<!--                    android:textSize="@dimen/text_big_med" />-->
-
-<!--            </LinearLayout>-->
         </LinearLayout>
-
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

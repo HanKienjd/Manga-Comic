@@ -2,115 +2,137 @@ package com.atul.mangatain.ui.setting;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.atul.mangatain.MTConstants;
 import com.atul.mangatain.MTPreferences;
 import com.atul.mangatain.R;
+import com.atul.mangatain.base.BaseFragment;
+import com.atul.mangatain.databinding.FragmentSettingBinding;
+import com.atul.mangatain.ui.auth.AuthActivity;
 import com.atul.mangatain.ui.setting.adapter.AccentAdapter;
 
-public class  SettingFragment extends Fragment implements View.OnClickListener {
-
-    private RecyclerView accentView;
-    private LinearLayout chipLayout;
-    private ImageView currentThemeMode;
-
-    public SettingFragment() {
-    }
-
+public class SettingFragment extends BaseFragment<FragmentSettingBinding, SettingViewModel> {
     public static SettingFragment newInstance() {
         return new SettingFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected FragmentSettingBinding provideBinding(LayoutInflater inflater, ViewGroup container, Boolean attachToParent) {
+        return FragmentSettingBinding.inflate(inflater, container, attachToParent);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
-
-        accentView = view.findViewById(R.id.accent_view);
-        chipLayout = view.findViewById(R.id.chip_layout);
-        currentThemeMode = view.findViewById(R.id.current_theme_mode);
-
-        LinearLayout accentOption = view.findViewById(R.id.accent_option);
-        LinearLayout themeModeOption = view.findViewById(R.id.theme_mode_option);
-        LinearLayout githubOption = view.findViewById(R.id.github_option);
-
+    protected void createView() {
         setCurrentThemeMode();
+        configureRecyclerView();
+    }
 
-        accentView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        accentView.setAdapter(new AccentAdapter(getActivity()));
+    private void configureRecyclerView() {
+        binding.accentView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        binding.accentView.setAdapter(new AccentAdapter(getActivity()));
+    }
 
-        accentOption.setOnClickListener(this);
-        themeModeOption.setOnClickListener(this);
-        githubOption.setOnClickListener(this);
+    @Override
+    protected void registerObserver() {
+        super.registerObserver();
+        viewModel.viewStateLiveData.observe(this, this::handleLoginState);
+    }
 
-        view.findViewById(R.id.night_chip).setOnClickListener(this);
-        view.findViewById(R.id.light_chip).setOnClickListener(this);
-        view.findViewById(R.id.auto_chip).setOnClickListener(this);
+    private void handleLoginState(SettingViewModel.ViewState viewState) {
+        if (viewState.loggedIn) {
+            // show profile
+            binding.llProfile.setVisibility(View.VISIBLE);
+            binding.tvEmail.setText(viewState.email);
+            binding.login.setVisibility(View.GONE);
+        } else {
+            // show login button
+            binding.llProfile.setVisibility(View.GONE);
+            binding.login.setVisibility(View.VISIBLE);
+        }
+    }
 
-        return view;
+    @Override
+    protected void setupViewClickListener() {
+        super.setupViewClickListener();
+
+        binding.llProfile.setOnClickListener(this);
+        binding.login.setOnClickListener(this);
+        binding.accentOption.setOnClickListener(this);
+        binding.themeModeOption.setOnClickListener(this);
+        binding.githubOption.setOnClickListener(this);
+
+        binding.nightChip.setOnClickListener(this);
+        binding.lightChip.setOnClickListener(this);
+        binding.autoChip.setOnClickListener(this);
     }
 
     private void setCurrentThemeMode() {
         int mode = MTPreferences.getThemeMode(requireActivity().getApplicationContext());
 
         if (mode == AppCompatDelegate.MODE_NIGHT_NO)
-            currentThemeMode.setImageResource(R.drawable.ic_theme_mode_light);
+            binding.currentThemeMode.setImageResource(R.drawable.ic_theme_mode_light);
 
         else if (mode == AppCompatDelegate.MODE_NIGHT_YES)
-            currentThemeMode.setImageResource(R.drawable.ic_theme_mode_night);
+            binding.currentThemeMode.setImageResource(R.drawable.ic_theme_mode_night);
 
         else
-            currentThemeMode.setImageResource(R.drawable.ic_theme_mode_auto);
+            binding.currentThemeMode.setImageResource(R.drawable.ic_theme_mode_auto);
     }
-
 
     @Override
-    public void onClick(View v) {
-        int id = v.getId();
+    protected void onViewClicked(View view) {
+        super.onViewClicked(view);
+        int id = view.getId();
 
-        if (id == R.id.accent_option) {
-            int visibility = (accentView.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE;
-            accentView.setVisibility(visibility);
+        switch (id) {
+            case (R.id.accent_option):
+                int visibility = (binding.accentView.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE;
+                binding.accentView.setVisibility(visibility);
+                break;
+            case (R.id.github_option):
+                startActivity(new Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(MTConstants.GITHUB_REPO_URL)
+                ));
+                break;
+            case (R.id.theme_mode_option):
+                int mode = binding.chipLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
+                binding.chipLayout.setVisibility(mode);
+                break;
+            case (R.id.night_chip):
+                selectTheme(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case (R.id.light_chip):
+                selectTheme(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case (R.id.auto_chip):
+                selectTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+            case (R.id.login):
+                goToLoginScreen();
+                break;
+            case (R.id.llProfile):
+                viewModel.signOut();
+                break;
         }
-
-        else if(id == R.id.github_option){
-            startActivity(new Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(MTConstants.GITHUB_REPO_URL)
-            ));
-        }
-
-        else if (id == R.id.theme_mode_option) {
-            int mode = chipLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE;
-            chipLayout.setVisibility(mode);
-        }
-
-        else if (id == R.id.night_chip)
-            selectTheme(AppCompatDelegate.MODE_NIGHT_YES);
-
-        else if (id == R.id.light_chip)
-            selectTheme(AppCompatDelegate.MODE_NIGHT_NO);
-
-        else if (id == R.id.auto_chip)
-            selectTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    private void goToLoginScreen() {
+        Intent intent = new Intent(getActivity(), AuthActivity.class);
+        startActivity(intent);
+    }
 
     private void selectTheme(int theme) {
         AppCompatDelegate.setDefaultNightMode(theme);

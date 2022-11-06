@@ -24,14 +24,22 @@
     <string name="info_filter">GENRES</string>
     <string name="options">OPTIONS</string>
     <string name="remove_from_library">Remove from library</string>
-    <string name="sing_in">Sign in</string>
+    <string name="sign_in">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="login_desc">Sign in or Register an account</string>
+    <string name="click_to_signout">Click to sign out</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="invalid_email">Invalid email.</string>
+    <string name="register_now">Don\'t have account? Register now.</string>
+    <string name="login_now">Already have account? Login now.</string>
+    <string name="passwords_do_not_match">Passwords do not match. Please recheck your confirm password.</string>
 </resources>

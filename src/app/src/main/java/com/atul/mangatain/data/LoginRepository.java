@@ -1,6 +1,12 @@
 package com.atul.mangatain.data;
 
+import android.database.Observable;
+
+import androidx.annotation.NonNull;
+
 import com.atul.mangatain.data.model.LoggedInUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -12,11 +18,8 @@ public class LoginRepository {
 
     private LoginDataSource dataSource;
 
-    // If user credentials will be cached in local storage, it is recommended it be encrypted
-    // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
-
     // private constructor : singleton access
+
     private LoginRepository(LoginDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -28,27 +31,23 @@ public class LoginRepository {
         return instance;
     }
 
+    public FirebaseUser getUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
     public boolean isLoggedIn() {
-        return user != null;
+        return FirebaseAuth.getInstance().getCurrentUser() != null;
     }
 
     public void logout() {
-        user = null;
         dataSource.logout();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
-        this.user = user;
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
+    public void register(String email, String password, ResultListener resultListener) {
+        dataSource.registerWithFirebase(email, password, resultListener);
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
-        // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
-        if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
-        }
-        return result;
+    public void login(String email, String password, ResultListener resultListener) {
+        dataSource.login(email, password, resultListener);
     }
 }
