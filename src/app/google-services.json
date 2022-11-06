@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "78887750627",
+    "project_id": "comic-app-a3f33",
+    "storage_bucket": "comic-app-a3f33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78887750627:android:b51f01b2a1615692882ed6",
+        "android_client_info": {
+          "package_name": "com.atul.mangatain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78887750627-i4bjhubkfphq3bh5ag8p9nefvv1kj1te.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyYgjt9r-oetq9LhdjFy_SoTjyXcWzuY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78887750627-i4bjhubkfphq3bh5ag8p9nefvv1kj1te.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
